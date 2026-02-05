@@ -1,27 +1,27 @@
-let messageIndex = 0;
+// Simple behavior: toggle active class and print chosen value
+document.addEventListener('DOMContentLoaded', () => {
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
 
-const messages = [
-  "NO",
-  "Are you sure?",
-  "Think again 😏",
-  "Really?",
-  "Last chance 😜"
-];
+  if (!yesBtn || !noBtn) {
+    console.error('Buttons not found in DOM. Check IDs in HTML.');
+    return;
+  }
 
-function handleNoClick() {
-  const noButton = document.querySelector('.no-button');
-  const yesButton = document.querySelector('.yes-button');
+  function clearActive() {
+    yesBtn.classList.remove('active');
+    noBtn.classList.remove('active');
+  }
 
-  noButton.textContent = messages[messageIndex];
-  messageIndex = (messageIndex + 1) % messages.length;
+  yesBtn.addEventListener('click', () => {
+    clearActive();
+    yesBtn.classList.add('active');
+    console.log('Chosen: YES');
+  });
 
-  const currentSize = parseFloat(
-    window.getComputedStyle(yesButton).fontSize
-  );
-
-  yesButton.style.fontSize = ${currentSize * 1.5}px;
-}
-
-function handleYesClick() {
-  window.location.href = "yes_page.html";
-}
+  noBtn.addEventListener('click', () => {
+    clearActive();
+    noBtn.classList.add('active');
+    console.log('Chosen: NO');
+  });
+});
